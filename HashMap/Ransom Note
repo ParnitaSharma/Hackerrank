@@ -1,0 +1,53 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class RansomNote {
+public static void main(String args[]) {
+	int n = 6;
+	int n1 = 5;
+	String magazine[]= new String[n];
+	String note[]=new String[n1];
+	HashMap <String,Integer> h1 = new HashMap<String,Integer>();
+	Scanner sc = new Scanner(System.in);
+	for(int i=0;i<magazine.length;i++) {
+		magazine[i]=sc.next();
+	}
+	for(int i=0;i<note.length;i++) {
+		note[i]=sc.next();
+	}
+	if(note==null){
+        System.out.println("No");   
+        return; 
+    }    
+//corner case 2.   
+if(note.length > magazine.length){
+        System.out.println("No");
+        return;
+    }
+//store the Magazine string array element in the HashMap and keep count.     
+    HashMap<String, Integer> hm= new HashMap<String, Integer>();
+    for(int i=magazine.length-1;i>=0;i--){
+        if(hm.containsKey(magazine[i])){
+            hm.put(magazine[i], hm.get(magazine[i])+1);
+        }else{
+            hm.put(magazine[i],1);
+        }
+    }
+//Traverse through the Hash Map and compare the Note string array elements to the Magazine string array elements.Subtract 1 from the value a matching string. If you find anyvalue in the HashMap less than 0, you should print No.
+   for(int i=note.length-1;i>=0;i--){
+        if(hm.containsKey(note[i])){
+            hm.put(note[i], hm.get(note[i]) - 1);
+                if(hm.get(note[i]) < 0){
+                System.out.println("No");
+                return;
+             }
+        }else{
+            System.out.println("No");
+                return;
+        }
+    }
+//Anything else should give a Yes.        
+    System.out.println("Yes");
+   
+}
+}
