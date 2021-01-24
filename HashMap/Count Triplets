@@ -1,0 +1,55 @@
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+public class CountTriplets {
+public static void main(String args[]) {
+	int n=4;
+	int r= 2;
+	List<Long> arr = new ArrayList<>() ;
+	Scanner sc = new Scanner(System.in);
+	
+	for(int i=0;i<n;i++) {
+		arr.add((long) sc.nextInt());
+	}
+	
+	 HashMap<Long,Long> rightSide = new HashMap<Long,Long>();
+	    HashMap<Long,Long> leftSide = new HashMap<Long,Long>();
+	    long val =1;
+	    for(long item: arr){
+	        if(rightSide.containsKey(item)){
+	            long num = rightSide.get(item)+1L;
+	            rightSide.put(item, num);
+	        }
+	        else{
+	            rightSide.put(item, 1L);
+	        }
+	    }
+	    long count=0;
+	    for(int i =0;i<arr.size();i++){
+	        long midTerm=arr.get(i);
+	        
+	            long m = rightSide.get(midTerm);
+	            rightSide.put(midTerm, m-1L);
+	        
+	        long c1=0; long c2 = 0;
+	        if(rightSide.containsKey(midTerm*r)){
+	            c1 = rightSide.get(midTerm*r);
+	        }
+	        if(leftSide.containsKey(midTerm/r) && midTerm%r==0){
+	            c2 = rightSide.get(midTerm/r);
+	        }
+	        count = count+c1*c2;
+	        if(leftSide.containsKey(arr.get(i))){
+	            long num = leftSide.get(arr.get(i))+val;
+	            leftSide.put(arr.get(i), num);
+	        }
+	        else{
+	           leftSide.put(arr.get(i), val);
+	        }
+	    }
+	    System.out.println(count);
+}
+}
