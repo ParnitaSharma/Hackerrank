@@ -1,0 +1,16 @@
+public class JavaAdvanceGenerics {
+	public  <E> void printArray(E[] inputArray){
+	       for(E element:inputArray){
+	           System.out.printf("%s", element);
+	           System.out.println();
+	       }
+	       
+	   }
+	public static void main(String args[]) {
+		JavaAdvanceGenerics myPrinter = new JavaAdvanceGenerics();
+        Integer[] intArray = { 1, 2, 3 };
+        String[] stringArray = {"Hello", "World"};
+        myPrinter.printArray(intArray);
+        myPrinter.printArray(stringArray);
+	}
+}
