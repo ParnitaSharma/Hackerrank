@@ -1,0 +1,35 @@
+import java.util.HashMap;
+
+public class DeletionToMakeAnagrams {
+public static void main(String args[]) {
+	String s1 = "fcrxzwscanmligyxyvym";
+	String s2= "jxwtrhvujlmrpdoqbisbwhmgpmeoke";
+	HashMap<Character, Integer> hm = new HashMap<>();
+	for(char i : s1.toCharArray()) {
+		if(!hm.containsKey(i)) {
+			hm.put(i, 1);
+		}
+		else {
+			hm.put(i, (hm.get(i))+1);
+		}
+	}
+	int count =0;
+	for(char i : s2.toCharArray()) {
+		if(!hm.containsKey(i)) {
+			count++;
+		}
+		else {
+			hm.put(i, (hm.get(i))-1);
+		}
+	}
+	int del = 0;
+	
+	for(int x: hm.values()) {
+		if(x!=0) {
+			del+= Math.abs(x);
+		}
+		
+	}
+	System.out.println(del + count);
+}
+}
